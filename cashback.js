@@ -1,14 +1,10 @@
-(function () {
-    const scripts = document.getElementsByTagName('cashback');
+(function() {
+    const scripts = document.getElementsByTagName('script');
     const currentScript = scripts[scripts.length - 1];
+    const urlParams = new URL(currentScript.src).searchParams;
 
-    // Pegando atributos data-*
-    const usuarioId = currentScript.getAttribute('data-usuario-id');
-    const plano = currentScript.getAttribute('data-plano');
+    const usuarioId = urlParams.get('usuarioId');
+    const plano = urlParams.get('plano');
 
-    console.log("Usuário ID:", usuarioId);
-    console.log("Plano:", plano);
-
-    // Exemplo: mostrar em alert
-    alert(`Bem-vindo, usuário ${usuarioId} com plano ${plano}!`);
+    console.log(usuarioId, plano);
 })();
