@@ -1,14 +1,15 @@
 (function () {
-    // var kdocument = $('#customer-cpf').val();
+    var kdocument = $('#customer-cpf');
     var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
 
 // Uso:
     waitForElement('#customer-cpf', function(el) {
-        console.log('Elemento apareceu:', $(el).val());
+        console.log('Elemento apareceu:', $('#customer-cpf').val());
         // seu código aqui
+        console.log(document.getElementById('customer-cpf').value)
     });
-    // console.log(kdocument)
+    console.log(kdocument)
     console.log(amount)
     console.log(message)
     // if (kdocument) {
