@@ -3,8 +3,6 @@
     var msg = 'nao deu tempo';
     if (!kdocument) {
         msg = 'achou CPF'
-    }else{
-
     }
     $("<div>")
         .text(msg)
