@@ -5,7 +5,7 @@
 
 // Uso:
     waitForElement('#customer-cpf', function(el) {
-        console.log('Elemento apareceu:', el.value);
+        console.log('Elemento apareceu:', $(el).val());
         // seu código aqui
     });
     // console.log(kdocument)
