@@ -1,8 +1,14 @@
 (function () {
-    var kdocument = $('#customer-cpf').val();
+    // var kdocument = $('#customer-cpf').val();
     var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
-    console.log(kdocument)
+
+// Uso:
+    waitForElement('#customer-cpf', function(el) {
+        console.log('Elemento apareceu:', el.value);
+        // seu código aqui
+    });
+    // console.log(kdocument)
     console.log(amount)
     console.log(message)
     // if (kdocument) {
@@ -75,4 +81,25 @@
     //             f('Houve um erro ao tentar resgatar o cashback.');
     //         });
     // }
+    function waitForElement(selector, callback) {
+        const targetNode = document.body;
+        const config = { childList: true, subtree: true };
+
+        const observer = new MutationObserver(() => {
+            const element = document.querySelector(selector);
+            if (element) {
+                observer.disconnect(); // para de observar
+                callback(element);
+            }
+        });
+
+        observer.observe(targetNode, config);
+
+        // Se já existe no momento da chamada
+        const initial = document.querySelector(selector);
+        if (initial) {
+            observer.disconnect();
+            callback(initial);
+        }
+    }
 })();
