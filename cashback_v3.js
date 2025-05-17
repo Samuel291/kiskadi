@@ -5,6 +5,7 @@ window.onload = function () {
         const el = document.querySelector('#customer-cpf');
 
         console.log(el);
+        console.log($('#customer-cpf'));
         // // Verifica se o elemento realmente existe antes de tentar adicionar os listeners
         // if (el) {
         //     el.addEventListener('input', () => {
