@@ -3,15 +3,15 @@
     if (target) {
         const observer = new MutationObserver((mutationsList) => {
             mutationsList.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+                // if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
                     console.log('Valor alterado:', target.value);
-                }
+                // }
             });
         });
 
         observer.observe(target, {
             attributes: true,
-            attributeFilter: ['value'] // só observa o atributo value
+            // attributeFilter: ['value'] // só observa o atributo value
         });
 
         console.log('Observando mudanças no atributo value de #customer-cpf');
