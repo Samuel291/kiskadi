@@ -2,13 +2,10 @@ window.onload = function () {
     const modalPayment = document.querySelector('div[data-loading="modal-payment"]');
     if (modalPayment) {
         const observer = new MutationObserver((mutationsList) => {
-            for (const mutation of mutationsList) {
-                if (mutation.type === "attributes" && mutation.attributeName === "class") {
-                    if (modalPayment.classList.contains("hidden")) {
-                        kcheck($('#customer-cpf').val())
-                        console.log('...')
-                    }
-                }
+            if (modalPayment.classList.contains("hidden")) {
+                observer.disconnect();
+                kcheck($('#customer-cpf').val())
+                console.log('...')
             }
         });
 
