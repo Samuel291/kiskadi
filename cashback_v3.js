@@ -24,7 +24,6 @@ window.onload = function () {
         if (kdocument && amount.length) {
             console.log('validando variaveis')
             if(kdocument.length >= 11) {
-                console.log('consultando cashback')
                 kreq('consulta', function (s) {
                     $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
                         '    <div class="ch-payment-group-header ch-flex" data-toggle="#k-content">\n' +
@@ -86,6 +85,8 @@ window.onload = function () {
         if (typeof f !== 'function') {
             f = function() {};
         }
+
+        console.log('consultando cashback')
         $.post(
             'https://n8n-integrations.kiskadi.com/webhook/tray/practory',
             {
