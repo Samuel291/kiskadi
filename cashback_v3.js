@@ -18,6 +18,9 @@ window.onload = function () {
             id = id.replace(/\D/g, "");
             id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
                 renderCashbackUI(r, id, amountEl, msg)
+            }, err => {
+                $('#k-preloader').remove();
+                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px 0;">' + err.message + "</span>")
             }) : showBalanceCheckUI(amountEl, msg)
         }
     }
@@ -27,10 +30,8 @@ window.onload = function () {
     }
 
     function requestCashback(doc, amountEl, type, onSuccess, onFail) {
-        onSuccess = typeof onSuccess === "function" ? onSuccess : function () {
-        };
-        onFail = typeof onFail === "function" ? onFail : function () {
-        };
+        onSuccess = typeof onSuccess === "function" ? onSuccess : function () {};
+        onFail = typeof onFail === "function" ? onFail : function () {};
         $.post("https://n8n-integrations.kiskadi.com/webhook/tray/practory", {
             document: doc,
             amount: amountEl,
