@@ -1,6 +1,6 @@
 window.onload = function () {
     var kdocument = $('#customer-cpf').val();
-    const alvo = document.getElementById("consumer-cpf");
+    const alvo = document.getElementById("customer-cpf");
     console.log('antes do observer:')
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
