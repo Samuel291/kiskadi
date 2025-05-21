@@ -1,4 +1,4 @@
-$(document).ready(function()  {
+window.onload = function () {
     var kdocument = $('#customer-cpf').val();
     const alvo = document.getElementById("customer-cpf");
     console.log('vamos ver')
@@ -12,6 +12,7 @@ $(document).ready(function()  {
             console.log("minhaVariavel NÃO existe");
         }
     }, 1000); // espera 2000ms (1 segundos) antes de rodar o código
+
 
     // var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     // var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
