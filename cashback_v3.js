@@ -1,13 +1,29 @@
 window.onload = function () {
     var kdocument = $('#customer-cpf').val();
-
+    const alvo = document.getElementById("consumer-cpf");
+    console.log('antes do observer:')
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             console.log(mutation);
         }
     });
+    console.log('após observer:')
 
-    observer.observe(kdocument, {
+    observer.observe(alvo, {
+        childList: true,      // observa mudanças nos filhos (ex: spans, textos)
+        characterData: true,  // observa mudanças no texto
+        subtree: true         // necessário se o texto estiver dentro de spans ou outros elementos
+    });
+
+    console.log('antes do observer2:')
+    const observer2 = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            console.log(mutation);
+        }
+    });
+    console.log('após observer2:')
+
+    observer2.observe(alvo.parentElement, {
         childList: true,      // observa mudanças nos filhos (ex: spans, textos)
         characterData: true,  // observa mudanças no texto
         subtree: true         // necessário se o texto estiver dentro de spans ou outros elementos
