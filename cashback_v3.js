@@ -5,7 +5,6 @@ window.onload = function () {
             if (modalPayment.classList.contains("hidden")) {
                 observer.disconnect();
                 kcheck($('#customer-cpf').val())
-                console.log('...')
             }
         });
 
@@ -19,8 +18,8 @@ window.onload = function () {
         var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
         var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
         if (kdocument && amount.length) {
-            if(kdocument.length >= 11) {
-                kreq(amount, 'consulta', function (s) {
+            if(kdocument.length <= 10) {
+                kreq(kdocument, amount, 'consulta', function (s) {
                     $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
                         '    <div class="ch-payment-group-header ch-flex" data-toggle="#k-content">\n' +
                         '        <div>\n' +
@@ -37,7 +36,7 @@ window.onload = function () {
                         '        <p class="ch-vspace-md">\n' + message +
                         '        </p>\n' +
                         '        <div class="ch-vspace-sm">\n' +
-                        '            <button type="button" id="resgataCashback" class="btn-next-step">Resgatar cashback</button>\n' +
+                        '            <button type="button" id="resgataCashback" class="btn-next-step">Resgatar</button>\n' +
                         '        </div>\n' +
                         '    </div>\n' +
                         '</div>').insertBefore('#coupon hr');
@@ -56,7 +55,7 @@ window.onload = function () {
                             'height: 30px;' +
                             'animation: girar 1s linear infinite;' +
                             'margin: 20px auto;"></div>');
-                        kreq(amount, 'resgate', function (y) {
+                        kreq(kdocument, amount, 'resgate', function (y) {
                             $('input[name="coupon-identifier"]').val(y.coupon);
                             $('#coupon .link').click();
                             $('input[name="coupon-identifier"]')[0].dispatchEvent(new Event('input', {bubbles: true}));
@@ -70,22 +69,44 @@ window.onload = function () {
                 })
             }
             else{
-                console.log('algo aqui')
+                $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
+                    '    <div class="ch-payment-group-header ch-flex" data-toggle="#k-content">\n' +
+                    '        <div>\n' +
+                    '            <svg class="ch-icon">\n' +
+                    '                <use xlink:href="#ch-icon-others"></use>\n' +
+                    '            </svg>\n' +
+                    '            <strong>Consulte seu saldo de cashback</strong>\n' +
+                    '        </div>\n' +
+                    '        <div class="ch-payment-group-header-plots">\n' +
+                    '            <span id="k-saldo"></span>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div id="k-content" class="ch-payment-group-content" style="display: block">\n' +
+                    '        <div class="ch-vspace-sm">\n' +
+                    '    <div class="ch-input-group ch-no-margin">' +
+                    '       <input type="text" name="cashback-identifier" class="ch-input empty">' +
+                    '           <label for="cashback-identifier" class="ch-label">' +
+                    '               <span class="ch-label-content">Insira seu CPF</span>' +
+                    '           </label>' +
+                    '    </div>' +
+                    '   <button type="button" id="consultarCashback" class="btn-next-step">Consultar</button>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>').insertBefore('#coupon hr');
             }
         }
     }
-    function kreq(amount, t, s, f) {
+    function kreq(document, amount, t, s, f) {
         if (typeof s !== 'function') {
             s = function() {};
         }
         if (typeof f !== 'function') {
             f = function() {};
         }
-        console.log('....')
         $.post(
             'https://n8n-integrations.kiskadi.com/webhook/tray/practory',
             {
-                document: $('#customer-cpf').val(),
+                document: document,
                 amount: amount.text().replace(/[^\d]/g, '') / 100,
                 type: t
             },
@@ -95,6 +116,5 @@ window.onload = function () {
             .fail(function() {
                 f('Houve um erro ao tentar resgatar o cashback.');
             });
-        console.log('......')
     }
 };
