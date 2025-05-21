@@ -93,7 +93,7 @@ window.onload = function () {
                     '   <button type="button" id="consultarCashback" class="btn-next-step">Consultar</button>\n' +
                     '        </div>' +
                     '    </div>' +
-                    '<span id="k-msg"></span>'+
+                    '<span id="k-msg" style=" display: flex; justify-content: center; padding: 10px 0;"></span>'+
                     '</div>').insertBefore('#coupon hr');
                 $('#consultarCashback').click(function () {
                     $('#k-msg').html('');
@@ -160,7 +160,8 @@ window.onload = function () {
                             })
                         })
                     }else{
-                        $('#k-container #k-msg').html('<p>Por favor insira um CPF válido.</p>')
+                        $('#k-preloader').remove()
+                        $('#k-container #k-msg').html('Por favor insira um CPF válido.')
                     }
                 })
             }
