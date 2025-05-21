@@ -22,7 +22,9 @@ window.onload = function () {
         var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
         var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
         if (kdocument && amount.length) {
+            console.log('validando variaveis')
             if(kdocument.length >= 11) {
+                console.log('consultando cashback')
                 kreq('consulta', function (s) {
                     $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
                         '    <div class="ch-payment-group-header ch-flex" data-toggle="#k-content">\n' +
@@ -73,7 +75,7 @@ window.onload = function () {
                 })
             }
             else{
-                console.log('algo de errado não tá certo')
+
             }
         }
     }
