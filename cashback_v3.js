@@ -1,35 +1,17 @@
-window.onload = function () {
+$(document).ready(function()  {
     var kdocument = $('#customer-cpf').val();
     const alvo = document.getElementById("customer-cpf");
-    console.log('antes do observer:')
-    const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            console.log(mutation);
+    console.log('vamos ver')
+    console.log(kdocument)
+    console.log(alvo.value)
+    console.log('ja vi')
+    setTimeout(() => {
+        if (typeof kdocument != '') {
+            console.log("minhaVariavel existe:", kdocument);
+        } else {
+            console.log("minhaVariavel NÃO existe");
         }
-    });
-    console.log('após observer:')
-
-    observer.observe(alvo, {
-        childList: true,      // observa mudanças nos filhos (ex: spans, textos)
-        characterData: true,  // observa mudanças no texto
-        subtree: true         // necessário se o texto estiver dentro de spans ou outros elementos
-    });
-
-    console.log('antes do observer2:')
-    const observer2 = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            console.log(mutation);
-        }
-    });
-    console.log('após observer2:')
-
-    observer2.observe(alvo.parentElement, {
-        childList: true,      // observa mudanças nos filhos (ex: spans, textos)
-        characterData: true,  // observa mudanças no texto
-        subtree: true         // necessário se o texto estiver dentro de spans ou outros elementos
-    });
-
-
+    }, 1000); // espera 2000ms (1 segundos) antes de rodar o código
 
     // var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     // var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
