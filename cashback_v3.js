@@ -11,7 +11,7 @@ window.onload = function () {
     }
 
     function processDocument(id) {
-        const amountEl = $('span[data-bind="money: checkout.subtotal"]').first(),
+        let amountEl = $('span[data-bind="money: checkout.subtotal"]').first().text().replace(/[^\d]/g, "") / 100,
             msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
         if (id && amountEl >= 200) {
             id = id.replace(/\D/g, "");
@@ -32,7 +32,7 @@ window.onload = function () {
         };
         $.post("https://n8n-integrations.kiskadi.com/webhook/tray/practory", {
             document: doc,
-            amount: amountEl.text().replace(/[^\d]/g, "") / 100,
+            amount: amountEl,
             type: type
         }, r => {
             r.success ? onSuccess(r) : onFail(r)
