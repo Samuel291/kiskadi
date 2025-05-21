@@ -5,7 +5,6 @@ window.onload = function () {
             for (const mutation of mutationsList) {
                 if (mutation.type === "attributes" && mutation.attributeName === "class") {
                     if (modalPayment.classList.contains("hidden")) {
-                        console.log('Consulta de cashback iniciada...')
                         kcheck($('#customer-cpf').val())
                     }
                 }
@@ -22,7 +21,6 @@ window.onload = function () {
         var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
         var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
         if (kdocument && amount.length) {
-            console.log('validando variaveis')
             if(kdocument.length >= 11) {
                 kreq('consulta', function (s) {
                     $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
@@ -85,8 +83,6 @@ window.onload = function () {
         if (typeof f !== 'function') {
             f = function() {};
         }
-
-        console.log('consultando cashback')
         $.post(
             'https://n8n-integrations.kiskadi.com/webhook/tray/practory',
             {
@@ -99,6 +95,7 @@ window.onload = function () {
             })
             .fail(function() {
                 f('Houve um erro ao tentar resgatar o cashback.');
+                console.log('deu erro')
             });
     }
 };
