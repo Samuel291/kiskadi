@@ -77,3 +77,5 @@ window.onload = function () {
     //         });
     // }
 };
+console.log('fim:')
+console.log($('#customer-cpf').val())
