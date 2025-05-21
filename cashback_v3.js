@@ -110,6 +110,7 @@ window.onload = function () {
                         'margin: 20px auto;"></div>');
                     kdocument = $('#k-document').replace(/\D/g, '');
                     if(kdocument.length === 11) {
+                        console.log('passou por aqui!')
                         kreq(kdocument, amount, 'consulta', function (s) {
                             $('#k-container').remove();
                             $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
