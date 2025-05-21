@@ -13,7 +13,7 @@ window.onload = function () {
     function processDocument(id) {
         const amountEl = $('span[data-bind="money: checkout.subtotal"]').first(),
             msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
-        if (id && amountEl.length) {
+        if (id && amountEl >= 200) {
             id = id.replace(/\D/g, "");
             id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
                 renderCashbackUI(r, id, amountEl, msg)
