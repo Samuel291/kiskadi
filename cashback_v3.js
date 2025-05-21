@@ -6,6 +6,7 @@ window.onload = function () {
                 if (mutation.type === "attributes" && mutation.attributeName === "class") {
                     if (modalPayment.classList.contains("hidden")) {
                         kcheck($('#customer-cpf').val())
+                        console.log('...')
                     }
                 }
             }
@@ -20,7 +21,7 @@ window.onload = function () {
     function kcheck(kdocument) {
         var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
         var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
-        if (kdocument && amount.length) {
+        // if (kdocument && amount.length) {
             if(kdocument.length >= 11) {
                 kreq('consulta', function (s) {
                     $('<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container">\n' +
@@ -72,9 +73,9 @@ window.onload = function () {
                 })
             }
             else{
-
+                consol.log('algo aqui')
             }
-        }
+        // }
     }
     function kreq(t, s, f) {
         if (typeof s !== 'function') {
@@ -83,6 +84,7 @@ window.onload = function () {
         if (typeof f !== 'function') {
             f = function() {};
         }
+        console.log('....')
         $.post(
             'https://n8n-integrations.kiskadi.com/webhook/tray/practory',
             {
@@ -97,5 +99,6 @@ window.onload = function () {
                 f('Houve um erro ao tentar resgatar o cashback.');
                 console.log('deu erro')
             });
+        console.log('......')
     }
 };
