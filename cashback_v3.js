@@ -11,8 +11,9 @@ window.onload = function () {
     }
 
     function processDocument(id) {
-        let amountEl = $('span[data-bind="money: checkout.subtotal"]').first().text().replace(/[^\d]/g, "") / 100,
-            msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
+        let amountEl = $('span[data-bind="money: checkout.subtotal"]').first();
+        let msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
+        amountEl = amountEl.text().replace(/[^\d]/g, "") / 100;
         if (id && amountEl >= 200) {
             id = id.replace(/\D/g, "");
             id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
