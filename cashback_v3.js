@@ -1,9 +1,20 @@
-console.log('inicio:')
-console.log($('#customer-cpf').val())
 window.onload = function () {
     var kdocument = $('#customer-cpf').val();
-    console.log('após:')
-    console.log(kdocument)
+
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            console.log(mutation);
+        }
+    });
+
+    observer.observe(kdocument, {
+        childList: true,      // observa mudanças nos filhos (ex: spans, textos)
+        characterData: true,  // observa mudanças no texto
+        subtree: true         // necessário se o texto estiver dentro de spans ou outros elementos
+    });
+
+
+
     // var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     // var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
     // if (kdocument) {
@@ -77,5 +88,3 @@ window.onload = function () {
     //         });
     // }
 };
-console.log('fim:')
-console.log($('#customer-cpf').val())
