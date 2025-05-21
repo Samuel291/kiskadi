@@ -1,18 +1,29 @@
 window.onload = function () {
     var kdocument = $('#customer-cpf').val();
-    const alvo = document.getElementById("customer-cpf");
-    console.log('vamos ver')
-    console.log(kdocument)
-    console.log(alvo.value)
-    console.log('ja vi')
-    setTimeout(() => {
-        if (typeof kdocument != '') {
-            console.log("minhaVariavel existe:", kdocument);
-        } else {
-            console.log("minhaVariavel NÃO existe");
-        }
-    }, 1000); // espera 2000ms (1 segundos) antes de rodar o código
 
+
+    const target = document.querySelector('div[data-loading="modal-payment"]');
+
+    if (target) {
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                    if (target.classList.contains("hidden")) {
+                        console.log("A classe 'hidden' foi ADICIONADA");
+                    } else {
+                        console.log("A classe 'hidden' foi REMOVIDA");
+                    }
+                }
+            }
+        });
+
+        observer.observe(target, {
+            attributes: true, // observar mudanças de atributos
+            attributeFilter: ["class"], // só observar mudanças na classe
+        });
+    } else {
+        console.warn("Elemento com data-loading='modal-payment' não encontrado.");
+    }
 
     // var amount = $('span[data-bind="money: checkout.subtotal"]').eq(0);
     // var message = 'O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.';
