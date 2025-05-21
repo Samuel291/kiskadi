@@ -15,7 +15,7 @@ window.onload = function () {
             msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
         if (id && amountEl.length) {
             id = id.replace(/\D/g, "");
-            id.length <= 10 ? requestCashback(id, amountEl, "consulta", r => {
+            id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
                 renderCashbackUI(r, id, amountEl, msg)
             }) : showBalanceCheckUI(amountEl, msg)
         }
