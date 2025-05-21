@@ -108,7 +108,7 @@ window.onload = function () {
                         'height: 30px;' +
                         'animation: girar 1s linear infinite;' +
                         'margin: 20px auto;"></div>');
-                    kdocument = $('#k-document').replace(/\D/g, '');
+                    kdocument = $('#k-document').replaceAll(/\D/g, '');
                     if(kdocument.length === 11) {
                         console.log('passou por aqui!')
                         kreq(kdocument, amount, 'consulta', function (s) {
