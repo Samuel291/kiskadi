@@ -20,7 +20,7 @@ window.onload = function () {
                 renderCashbackUI(r, id, amountEl, msg)
             }, err => {
                 $('#k-preloader').remove();
-                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px 0;">' + err.message + "</span>")
+                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px;">' + err.message + "</span>")
             }) : showBalanceCheckUI(amountEl, msg)
         }
     }
@@ -57,13 +57,13 @@ window.onload = function () {
                 $('#validate-coupon-btn').click()
             }, err => {
                 $('#k-preloader').remove();
-                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px 0;">' + err + "</span>")
+                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px;">' + err + "</span>")
             })
         })
     }
 
     function showBalanceCheckUI(amountEl, msg) {
-        var markup = '<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container"><div class="ch-payment-group-header ch-flex" data-toggle="#k-content"><div><svg class="ch-icon"><use xlink:href="#ch-icon-others"></use></svg><strong>Consulte seu saldo de cashback</strong></div><div class="ch-payment-group-header-plots"><span id="k-saldo"></span></div></div><div id="k-content" class="ch-payment-group-content" style="display: block"><div class="ch-vspace-sm"><div class="ch-input-group ch-no-margin"><input type="text" id="k-document" name="cashback-identifier" class="ch-input" data-mask="00000000000" maxlength="11"><label for="cashback-identifier" class="ch-label"><span class="ch-label-content">Insira seu CPF</span></label></div><button type="button" id="checkCashback" class="btn-next-step">Consultar</button></div></div><span id="k-msg" style="display: flex; justify-content: center; padding: 10px 0;"></span></div>';
+        var markup = '<div class="ch-payment-group active selected" style="margin-top: 10px;" id="k-container"><div class="ch-payment-group-header ch-flex" data-toggle="#k-content"><div><svg class="ch-icon"><use xlink:href="#ch-icon-others"></use></svg><strong>Consulte seu saldo de cashback</strong></div><div class="ch-payment-group-header-plots"><span id="k-saldo"></span></div></div><div id="k-content" class="ch-payment-group-content" style="display: block"><div class="ch-vspace-sm"><div class="ch-input-group ch-no-margin"><input type="text" id="k-document" name="cashback-identifier" class="ch-input" data-mask="00000000000" maxlength="11"><label for="cashback-identifier" class="ch-label"><span class="ch-label-content">Insira seu CPF</span></label></div><button type="button" id="checkCashback" class="btn-next-step">Consultar</button></div></div><span id="k-msg" style="display: flex; justify-content: center; padding: 10px;"></span></div>';
         $(markup).insertBefore("#coupon hr");
         $('#checkCashback').click(function () {
             $('#k-msg').html("");
@@ -75,7 +75,7 @@ window.onload = function () {
                 renderCashbackUI(r, doc, amountEl, msg)
             }, err => {
                 $('#k-preloader').remove();
-                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px 0;">' + err + "</span>");
+                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px;">' + err + "</span>");
                 $('#checkCashback').prop("disabled", false);
             }) : ($('#k-preloader').remove(), $('#k-msg').html("Por favor insira um CPF válido."), $('#checkCashback').prop("disabled", false))
         })
