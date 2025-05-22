@@ -73,6 +73,9 @@ window.onload = function () {
             doc.length === 11 ? requestCashback(doc, amountEl, "consulta", r => {
                 $('#k-container').remove();
                 renderCashbackUI(r, doc, amountEl, msg)
+            }, err => {
+                $('#k-preloader').remove();
+                $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px 0;">' + err + "</span>")
             }) : ($('#k-preloader').remove(), $('#k-msg').html("Por favor insira um CPF válido."), $('#checkCashback').prop("disabled", false))
         })
     }
