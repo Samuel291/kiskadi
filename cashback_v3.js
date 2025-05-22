@@ -38,8 +38,8 @@ window.onload = function () {
             type: type
         }, r => {
             r.success ? onSuccess(r) : onFail(r)
-        }).fail(() => {
-            onFail("Houve um erro ao tentar resgatar o cashback.")
+        }).fail((f) => {
+            onFail(f.message ?? "Houve um erro ao tentar resgatar o cashback.")
         })
     }
 
