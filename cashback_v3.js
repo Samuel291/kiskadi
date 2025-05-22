@@ -39,8 +39,7 @@ window.onload = function () {
         }, r => {
             r.success ? onSuccess(r) : onFail(r)
         }).fail((f) => {
-            console.log(f)
-            onFail(f.message ?? "Houve um erro ao tentar resgatar o cashback.")
+            onFail(f.responseJSON.message ?? "Houve um erro ao tentar resgatar o cashback.")
         })
     }
 
