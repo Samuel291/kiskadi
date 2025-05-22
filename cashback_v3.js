@@ -16,7 +16,7 @@ window.onload = function () {
         amountEl = amountEl.text().replace(/[^\d]/g, "") / 100;
         if (id && amountEl >= 200) {
             id = id.replace(/\D/g, "");
-            id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
+            id.length <= 10 ? requestCashback(id, amountEl, "consulta", r => {
                 renderCashbackUI(r, id, amountEl, msg)
             }, err => {
                 $('#k-preloader').remove();
