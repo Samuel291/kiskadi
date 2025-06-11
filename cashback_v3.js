@@ -51,10 +51,9 @@ window.onload = function () {
             $('#k-container').append(createSpinner());
             $('#coupon .link')[0].dispatchEvent(new Event("click", {bubbles: true}))
             requestCashback(doc, amountEl, "resgate", r => {
-                $('input[name="coupon-identifier"]').val(r.coupon);
-                $('input[name="coupon-identifier"]')[0].dispatchEvent(new Event("input", {bubbles: true}));
+                $('input[name="coupon-identifier"]').val(r.coupon)[0].dispatchEvent(new Event("input", {bubbles: true}));
                 $('#k-container').remove();
-                $('#validate-coupon-btn').click()
+                $('#validate-coupon-btn')[0].dispatchEvent(new Event("click", {bubbles: true}))
             }, err => {
                 $('#k-preloader').remove();
                 $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px;">' + err + "</span>")
