@@ -52,8 +52,10 @@ window.onload = function () {
             $('#coupon .link')[0].dispatchEvent(new Event("click", {bubbles: true}))
             requestCashback(doc, amountEl, "resgate", r => {
                 let couponIdentifier = $('input[name="coupon-identifier"]');
-                couponIdentifier.val(r.coupon).removeClass('empty').trigger('input');
-                // couponIdentifier[0].dispatchEvent(new Event("input", {bubbles: true}));
+                couponIdentifier.val(r.coupon).removeClass('empty');
+                couponIdentifier[0].dispatchEvent(new Event('input', { bubbles: true }));
+                couponIdentifier[0].dispatchEvent(new Event('change', { bubbles: true }));
+                couponIdentifier[0].dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'M' }));
                 $('#k-container').remove();
                 $('#validate-coupon-btn').click();
             }, err => {
