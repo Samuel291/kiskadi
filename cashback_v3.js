@@ -49,7 +49,7 @@ window.onload = function () {
         $('#k-saldo').text(response.discount.toLocaleString("pt-BR", {style: "currency", currency: "BRL"}));
         $('#redeemCashback').click(function () {
             $('#k-container').append(createSpinner());
-            $('#coupon .link').click();
+            $('#coupon .link')[0].dispatchEvent(new Event("click", {bubbles: true}))
             requestCashback(doc, amountEl, "resgate", r => {
                 $('input[name="coupon-identifier"]').val(r.coupon);
                 $('input[name="coupon-identifier"]')[0].dispatchEvent(new Event("input", {bubbles: true}));
