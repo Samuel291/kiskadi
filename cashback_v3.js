@@ -57,7 +57,9 @@ window.onload = function () {
                 couponIdentifier[0].dispatchEvent(new Event('change', { bubbles: true }));
                 couponIdentifier[0].dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'M' }));
                 $('#k-container').remove();
-                $('#validate-coupon-btn').click();
+                setTimeout(() => {
+                    $('#validate-coupon-btn').click();
+                }, 500);
             }, err => {
                 $('#k-preloader').remove();
                 $('#k-container').append('<span style="display: flex; justify-content: center; padding: 10px;">' + err + "</span>")
