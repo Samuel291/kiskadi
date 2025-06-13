@@ -1,0 +1,184 @@
+html, body {
+    height: 100%;      /* Precisamos garantir que o body ocupe a altura total */
+    margin: 0;         /* Remove margens padrão */
+    display: flex;     /* Ativa flexbox no body */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    max-width: 320px;
+}
+#kiskadi-widget {
+    position: fixed;
+    width: 320px;
+    beackground-color: #FFFFFF;
+    border-radius: 12px;
+    /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);*/
+    /*z-index: 999999;*/
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    user-select: none;
+}
+#kiskadi-widget .header, #kiskadi-widget .body {
+    padding: 20px;
+}
+#kiskadi-widget .header {
+    border-radius: 12px;
+    background-color: #FA7108;
+    height: 100px;
+}
+#kiskadi-widget .body {
+    /*border-radius:  0 0 12px 12px;*/
+    border-radius:  12px;
+    background-color: #FFFFFF;
+}
+#kiskadi-widget:active {
+    cursor: grabbing;
+}
+
+.search-box input {
+    width: 88%;
+    border: none;
+    outline: none;
+    border-radius: 40px 0 0 40px;
+    padding: 12px 16px;
+    font-size: 16px;
+    color: #8b3f00;
+    flex: 1;
+}
+
+#kiskadi-widget input.k-document::placeholder {
+    color: #aa4400;
+}
+#kiskadi-widget input.login {
+    width: 88%;
+    border: 1px solid #8b3f00;
+    /*outline: none;*/
+    border-radius: 40px;
+    padding: 12px 16px;
+    font-size: 16px;
+    color: #8b3f00;
+    flex: 1;
+    margin-top: 10px;
+}
+
+#kiskadi-widget input.login::placeholder {
+    color: #aa4400;
+}
+#kiskadi-widget form{
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 400px) {
+    #kiskadi-widget {
+        width: 90%;
+        left: 5% !important;
+        right: 5% !important;
+    }
+}
+
+
+.search-box {
+    display: flex;
+    background: #FFFFFF;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 4px solid #b34e00;
+}
+
+.search-btn {
+    background-color: #ff8800;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.cashback-title {
+    text-align: center;
+    color: #727A9080;
+    margin-bottom: 10px;
+}
+.cashback-content {
+    background-color: #f0fdf4;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.cashback-content small {
+    font-size: 16px;
+    color: #4caf50;
+}
+
+.cashback-value {
+    font-size: 40px;
+    font-weight: bolder;
+    color: #2e7d32;
+    margin: 5px 0;
+}
+.k-btn-secondary{
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    background-color: #FA71081A;
+    color: #FA7108;
+}
+button[disabled].k-btn-secondary{
+    background-color: #F5F5F5CC;
+    color: #727A90;
+}
+button[disabled].k-btn-primary-outline{
+    border: 2px solid #F5F5F5CC;
+    color: #727A90;
+}
+.k-btn-primary {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #FFFFFF;
+    background-color: #FA7108;
+    margin-top: 15px;
+}
+.k-btn-primary-outline{
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #FA7108;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #FA7108;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+}
+.k-btn-default-subline{
+    border: none;
+    text-decoration: underline;
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #727A9080;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+}

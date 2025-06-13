@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Kiskadi Tarefas",
+  "description": "A Extensão Kiskadi Tarefas, auxilia no envio das mensagens dentro do Kiskadi, evitando abrir múltiplas abas do WhatsApp Web",
+  "version": "1.3.2",
+  "permissions": ["tabs", "webNavigation"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Kiskadi Tarefas"
+  }
+}
