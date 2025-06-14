@@ -1,7 +1,7 @@
 #kiskadi-widget {
     position: fixed;
     width: 300px;
-    beackground-color: #FFFFFF;
+    background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     z-index: 999999;
@@ -10,12 +10,12 @@
     user-select: none;
 }
 #kiskadi-widget .header, #kiskadi-widget .body {
-    padding: 20px;
+    padding: 12px 20px;
 }
 #kiskadi-widget .header {
     border-radius: 12px;
     background-color: #FA7108;
-    height: 100px;
+    height: 84px;
 }
 #kiskadi-widget .body {
     /*border-radius:  0 0 12px 12px;*/
@@ -124,7 +124,8 @@
 }
 .k-btn-secondary{
     display: block;
-    width: 100%;
+    width: 50%;
+    height: 50px;
     padding: 15px;
     border: none;
     border-radius: 30px;
@@ -145,7 +146,8 @@ button[disabled].k-btn-primary-outline{
 }
 .k-btn-primary {
     display: block;
-    width: 100%;
+    width: 50%;
+    height: 50px;
     padding: 15px;
     border: none;
     border-radius: 30px;
@@ -159,7 +161,8 @@ button[disabled].k-btn-primary-outline{
 }
 .k-btn-primary-outline{
     display: block;
-    width: 100%;
+    width: 50%;
+    height: 50px;
     padding: 15px;
     border: 1px solid #FA7108;
     border-radius: 30px;
@@ -169,7 +172,6 @@ button[disabled].k-btn-primary-outline{
     transition: 0.3s ease;
     color: #FA7108;
     background-color: #FFFFFF;
-    margin-top: 10px;
 }
 .k-btn-default-subline{
     border: none;
@@ -182,4 +184,15 @@ button[disabled].k-btn-primary-outline{
     color: #727A9080;
     background-color: #FFFFFF;
     margin-top: 10px;
+}
+.cashback-actions{
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+}
+#kiskadi-widget .footer{
+    display: flex;
+    justify-content: center;
+    color: #727A90;
+    padding: 5px;
 }

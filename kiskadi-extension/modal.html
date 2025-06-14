@@ -1,28 +1,41 @@
 <div id="kiskadi-widget">
     <div class="header">
         <div class="search-box">
-            <input type="text" id="k-document" placeholder="CPF do cliente!" />
-            <input type="hidden" id="k-amount" placeholder="Valor da venda!" />
+            <input type="text" id="k-document" placeholder="CPF do cliente!"/>
+            <input type="hidden" id="k-amount" placeholder="Valor da venda!"/>
             <button id="search-cashback" class="search-btn">
-                <svg fill="#FFFFFF" height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-39.07 -39.07 566.54 566.54" xml:space="preserve" stroke="#FFFFFF" stroke-width="24.419999999999998"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="3.9071999999999996"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z"></path> </g> </g> </g></svg>
+                <svg fill="#FFFFFF" height="24px" width="24px" version="1.1" id="Capa_1"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                     viewBox="-39.07 -39.07 566.54 566.54" xml:space="preserve" stroke="#FFFFFF"
+                     stroke-width="24.419999999999998"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+                       stroke-width="3.9071999999999996"></g>
+                    <g id="SVGRepo_iconCarrier"> <g> <g> <path
+                            d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z"></path> </g> </g> </g></svg>
             </button>
         </div>
     </div>
     <div class="body">
-        <div class="preloader" style="display:none; text-align: center;">
-            <img src="https://static-va.kiskadi.com/assets/loadinglogo-69147caf13ba787b5013683ef1c231297636d2acdbfc2d9710cb8f02eb7ca34e.gif" alt="Carregando..." width="164px" height="164px">
+        <div class="k-preloader" style="display:none; text-align: center;">
+            <img src="https://static-va.kiskadi.com/assets/loadinglogo-69147caf13ba787b5013683ef1c231297636d2acdbfc2d9710cb8f02eb7ca34e.gif"
+                 alt="Carregando..." width="164px" height="164px">
         </div>
-        <div class="content">
+        <div class="k-content">
             <div class="cashback-title">
                 <small><strong>Consulte o CPF para verificar o saldo</strong></small>
             </div>
             <div class="cashback-content">
-                <div class="cashback-total">Saldo total: R$<span id="balance_total">0,00</span></div>
-                <div class="cashback-value"><small>R$</small><span id="balance">0,00</span></div>
+                <div class="cashback-total">Saldo total: R$<span id="k-balance_total">0,00</span></div>
+                <div class="cashback-value"><small>R$</small><span id="k-balance">0,00</span></div>
             </div>
-            <button type="button" class="k-btn-secondary" id="exchange" disabled>Resgatar</button>
-            <button type="button" class="k-btn-primary-outline" id="clean" disabled>Limpar</button>
-            <button type="button" class="k-btn-default-subline" id="sigout">Sair</button>
+            <div class="cashback-actions">
+                <button type="button" class="k-btn-secondary" id="k-exchange" disabled>Resgatar</button>
+                <button type="button" class="k-btn-primary-outline" id="k-clean" disabled>Limpar</button>
+            </div>
         </div>
+    </div>
+    <div class="footer">
+<!--        <button type="button" class="k-btn-default-subline" id="k-sigout">Sair</button>-->
+        <small>Kiskadi Extension - Version 1.3.2</small>
     </div>
 </div>
