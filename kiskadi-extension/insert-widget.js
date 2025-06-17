@@ -148,7 +148,7 @@
                         localStorage.setItem('amountDiscount', discount.toFixed(2));
                         $('#k-balance').text(localStorage.getItem('amountDiscount').replace('.', ','))
                         $('#k-balance_total').text(discountTotal.toFixed(2).replace('.', ','))
-                        if($('#k-amount').val() > 0 && $('#k-amount').val() != 99999) {
+                        if($('#k-amount').val() > 0 && $('#k-amount').val() != 99999 && discount > 0) {
                             $('#k-exchange').removeAttr('disabled')
                         }
                         $('#k-clean').removeAttr('disabled')
