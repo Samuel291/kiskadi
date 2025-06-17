@@ -1,7 +1,6 @@
 (async () => {
     const kwidget = document.createElement('div');
     const EXISTING = document.getElementById('kiskadi-widget');
-    let exchanged = false;
     if (EXISTING) {
         EXISTING.remove();
         return;
@@ -116,12 +115,12 @@
                 $('#search-cashback').click()
             }
         });
-        document.getElementById('search-cashback')?.addEventListener('click', () => {
-
+        $('#search-cashback').on('click.checkCashback', () => {
             tooglePreload(true)
+            let kSaleAmount = ($('#k-amount').val() > 0)? $('#k-amount').val() : 99999;
 
             fetch('https://api.kiskadi.com/api/v2/consumers/exchangeable_points?branch_cnpj=' +
-                localStorage.getItem('branch_cnpj') +'&cpf=' + $('#k-document').val() +'&order_value=' + $('#k-amount').val(), {
+                localStorage.getItem('branch_cnpj') +'&cpf=' + $('#k-document').val() +'&order_value=' + kSaleAmount, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Basic ${localStorage.getItem('token')}`,
@@ -133,7 +132,6 @@
                         return res.json().then(body  => {
                             if (body.errors && body.errors[0] === 'Consumer not found') {
                                 $('.cashback-title small strong').text('Consumidor não cadastrado!');
-                                $('.cashback-title small strong')[0].style.color = '#FF0000';
                                 return;
                             }else {
                                 throw new Error('houve um erro ao consultar o saldo');
@@ -146,7 +144,7 @@
                 .then(data => {
                     var discount = parseFloat(data.available_discount);
                     var discountTotal = parseFloat(data.total_currency_balance);
-                    if(discount > 0.00) {
+                    if(discount >= 0.00) {
                         localStorage.setItem('amountDiscount', discount.toFixed(2));
                         $('#k-balance').text(localStorage.getItem('amountDiscount').replace('.', ','))
                         $('#k-balance_total').text(discountTotal.toFixed(2).replace('.', ','))
@@ -159,16 +157,16 @@
                     loadRequest()
                 })
                 .catch(err => {
-                    loadRequest(undefined, 'Houve um erro ao tentar consultar o saldo desse cliente.')
+                    cleanForm(false)
+                    loadRequest(undefined, 'Houve um erro ao tentar consultar o saldo desse cliente.', false)
                 });
         });
-        document.getElementById('k-clean')?.addEventListener('click', () => {
+        $('#k-clean').on('click', () => {
             cleanForm()
         });
-        document.getElementById('k-exchange')?.addEventListener('click', () => {
+        $('#k-exchange').on('click', () => {
             amountDiscount = localStorage.getItem('amountDiscount')
-            var discountAmount = 0.00;
-            exchanged = true;
+            var bufferDocument = $('#k-document').val();
             var inputDiscount = $("input[name='desconto']");
             var discountValue = inputDiscount.val().trim(); // remove espaços em branco
 
@@ -181,37 +179,35 @@
             discountAmount = discountAmount + parseFloat(amountDiscount);
             inputDiscount.val(discountAmount.toFixed(2).replace('.', ','));
             inputDiscount[0].dispatchEvent(new Event('blur'));
-        });
 
-
-        // Verifica se está na última etapa da venda para poder efetuar a troca no Kisakdi
-        document.getElementById('btnSalvarVendaRapida')?.addEventListener('click', () => {
-            if($('.forma-pagamento-section').length && exchanged === true) {
-                fetch('https://api.kiskadi.com/api/v2/transactions/exchange', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Basic ${localStorage.getItem('token')}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        force_drop: true,
-                        currency_used: localStorage.getItem('amountDiscount'),
-                        branch_cnpj: localStorage.getItem('branch_cnpj'),
-                        consumer: {
-                            cpf: $('#k-document').val()
+            cleanForm()
+            // Verifica se está na última etapa da venda para poder efetuar a troca no Kisakdi
+            $('#btnSalvarVendaRapida').one('click', () => {
+                if($('.forma-pagamento-section').length) {
+                    fetch('https://api.kiskadi.com/api/v2/transactions/exchange', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Basic ${localStorage.getItem('token')}`,
+                            'Content-Type': 'application/json'
                         },
-                        labels: ["Resgate via Tiny PDV"]
+                        body: JSON.stringify({
+                            force_drop: true,
+                            currency_used: localStorage.getItem('amountDiscount'),
+                            branch_cnpj: localStorage.getItem('branch_cnpj'),
+                            consumer: {
+                                cpf: bufferDocument
+                            },
+                            labels: ["Resgate via Tiny PDV"]
+                        })
                     })
-                })
-                    .then(res => res.text())
-                    .then(data => console.log('Webhook enviado:', data))
-                    .catch(err => console.log('Erro ao enviar:', err))
-                    .finally(() => {
-                        document.getElementById('k-document').value = '';
-                    });
-                exchanged = false;
-                cleanForm()
-            }
+                        .then(res => res.text())
+                        .catch(err => console.log('Erro ao enviar:', err))
+                        .finally(() => {
+                            document.getElementById('k-document').value = '';
+                        });
+                    bufferDocument = '';
+                }
+            });
         });
     }
 
@@ -228,12 +224,12 @@
             document.getElementsByClassName('k-preloader')[0].style.display = 'none';
         }
     }
-    function loadRequest(isLogedIn, message) {
+    function loadRequest(isLogedIn, message, showMessage = true) {
         tooglePreload(false)
         if(isLogedIn !== undefined) {
             localStorage.setItem('isLogedIn', isLogedIn ? 'true' : 'false');
         }
-        if (message) {
+        if (message && showMessage) {
             alert(message);
         }
     }
@@ -241,13 +237,15 @@
     /**
      * Limpa os dados para uma nova consulta
      */
-    function cleanForm() {
+    function cleanForm(modifyTitle = true) {
         $('#k-exchange').prop("disabled", true);
         $('#k-clean').prop("disabled", true);
         $('#k-balance').text('0,00')
         $('#k-balance_total').text('0,00')
-        $('#k-document').val('')
-        $('.cashback-title small strong').text('Consulte o CPF para verificar o saldo')
+        if(modifyTitle) {
+            $('#k-document').val('')
+            $('.cashback-title small strong').text('Consulte o CPF para verificar o saldo')
+        }
     }
 
     /**
