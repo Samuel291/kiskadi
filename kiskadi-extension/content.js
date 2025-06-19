@@ -3,7 +3,8 @@ $(document).ready(function () {
     const url = window.location.href;
 
     if (url.includes("app.tiny.com.br/vendas") || url.includes("erp.tiny.com.br/vendas")) {
-    } else if (url.includes("app.tiny.com.br/pdv") || url.includes("erp.tiny.com.br/pdv")) {
+    }
+    if (url.includes("app.tiny.com.br/pdv") || url.includes("erp.tiny.com.br/pdv")) {
 
         let consumerDocBuffer = $('#divDadosCliente').text().replace(/\D/g, '');
         const observer = new MutationObserver((mutationsList) => {

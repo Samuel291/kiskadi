@@ -8,7 +8,7 @@
   "action": { "default_title": "Kiskadi" },
   "content_scripts": [
     {
-      "matches": ["https://api.kiskadi.com/*","https://app.tiny.com.br/*","https://erp.tiny.com.br/*"],
+      "matches": ["https://api.kiskadi.com/*","https://app.tiny.com.br/*","https://erp.tiny.com.br/*","https://bling.com.br/*","https://erp.domagestao.com.br/*","https://app.tagplus.com.br/*"],
       "js": ["jquery.min.js", "content.js"],
       "css": ["style.css"],
       "run_at": "document_idle"
@@ -16,6 +16,6 @@
   ],
   "web_accessible_resources": [{
     "resources": ["login.html", "modal.html"],
-    "matches": ["https://api.kiskadi.com/*","https://app.tiny.com.br/*","https://erp.tiny.com.br/*"]
+    "matches": ["https://api.kiskadi.com/*","https://app.tiny.com.br/*","https://erp.tiny.com.br/*","https://bling.com.br/*","https://erp.domagestao.com.br/*","https://app.tagplus.com.br/*"]
   }]
 }
