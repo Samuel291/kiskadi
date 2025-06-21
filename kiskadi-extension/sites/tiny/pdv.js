@@ -55,10 +55,10 @@ export function listenRedeemCashback(widget, kDocument){
     });
     // Verifica se foi clicado para gerar um pagamento para escutar o botão finalizar venda
     $('#btnGerarPagamentoCobrancasPdv').one('click', () => {
-        $('.modal-footer button').filter(function () {
-            return $(this).text().toLowerCase().includes('finalizar venda');
-        }).on('click', function () {
-            widget.kRedeemCashback(kDocument)
+        $('#bs-modal').one('click', '.modal-footer button', function () {
+            if ($(this).text().toLowerCase().includes('finalizar venda')) {
+                widget.kRedeemCashback(kDocument)
+            }
         });
     });
 }
