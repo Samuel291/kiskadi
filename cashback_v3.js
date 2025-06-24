@@ -2,7 +2,7 @@ window.onload = function () {
     const modalPayment = document.querySelector('div[data-loading="modal-payment"]');
     if (modalPayment) {
         const observer = new MutationObserver(() => {
-            console.log('modalPayment')
+            console.log(modalPayment.classList)
             console.log($('#customer-cpf').val())
             if (modalPayment.classList.contains("hidden")) {
                 observer.disconnect();
