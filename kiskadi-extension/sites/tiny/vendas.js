@@ -22,7 +22,7 @@ export function listenSearchCashback(widget) {
     });
 
     // Faz uma nova consulta de saldo de cahsback quando usuário segue para pagamento
-    $('#pag_formaPagamento').on('click', function (e) {
+    $('#pag_formaPagamento').on('change', function (e) {
         let saleAmount = $('#divTotal').val().replace(/\D/g, '') / 100;
         if ($('#k-document').val()) {
             $('#k-amount').val(saleAmount)
