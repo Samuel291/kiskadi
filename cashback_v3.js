@@ -2,6 +2,8 @@ window.onload = function () {
     const modalPayment = document.querySelector('div[data-loading="modal-payment"]');
     if (modalPayment) {
         const observer = new MutationObserver(() => {
+            console.log('modalPayment')
+            console.log($('#customer-cpf').val())
             if (modalPayment.classList.contains("hidden")) {
                 observer.disconnect();
                 processDocument($('#customer-cpf').val())
@@ -14,6 +16,7 @@ window.onload = function () {
         let amountEl = $('span[data-bind="money: checkout.subtotal"]').first();
         let msg = "O cashback será resgatado como um cupom de desconto que será aplicado automaticamnete, não sendo cumulativo com outros cupons.";
         amountEl = amountEl.text().replace(/[^\d]/g, "") / 100;
+        console.log('Validando dados obrigatórios')
         if (id && amountEl >= 200) {
             id = id.replace(/\D/g, "");
             id.length >= 11 ? requestCashback(id, amountEl, "consulta", r => {
