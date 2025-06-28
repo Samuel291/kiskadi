@@ -119,48 +119,50 @@
         $('#search-cashback').on('click', () => {
             kTooglePreload(true)
             let kSaleAmount = ($('#k-amount').val() > 0)? $('#k-amount').val() : 99999;
-
-            fetch('https://api.kiskadi.com/api/v2/consumers/exchangeable_points?branch_cnpj=' +
-                localStorage.getItem('branch_cnpj') +'&cpf=' + $('#k-document').val() +'&order_value=' + kSaleAmount, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Basic ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        return res.json().then(body  => {
-                            if (body.errors && body.errors[0] === 'Consumer not found') {
-                                $('.cashback-title small strong').text('Consumidor não cadastrado!');
-                                return;
-                            }else {
-                                throw new Error('houve um erro ao consultar o saldo');
-                            }
-                        });
-                    } else {
-                        return res.json();
+            let kDocument = $('#k-document').val();
+            if(kDocument) {
+                fetch('https://api.kiskadi.com/api/v2/consumers/exchangeable_points?branch_cnpj=' +
+                    localStorage.getItem('branch_cnpj') + '&cpf=' + $('#k-document').val() + '&order_value=' + kSaleAmount, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Basic ${localStorage.getItem('token')}`,
+                        'Content-Type': 'application/json'
                     }
                 })
-                .then(data => {
-                    var discount = parseFloat(data.available_discount);
-                    var discountTotal = parseFloat(data.total_currency_balance);
-                    if(discount >= 0.00) {
-                        localStorage.setItem('amountDiscount', discount.toFixed(2));
-                        $('#k-balance').text(localStorage.getItem('amountDiscount').replace('.', ','))
-                        $('#k-balance_total').text(discountTotal.toFixed(2).replace('.', ','))
-                        if($('#k-amount').val() > 0 && $('#k-amount').val() != 99999 && discount > 0) {
-                            $('#k-exchange').removeAttr('disabled')
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().then(body => {
+                                if (body.errors && body.errors[0] === 'Consumer not found') {
+                                    $('.cashback-title small strong').text('Consumidor não cadastrado!');
+                                    return;
+                                } else {
+                                    throw new Error('houve um erro ao consultar o saldo');
+                                }
+                            });
+                        } else {
+                            return res.json();
                         }
-                        $('#k-clean').removeAttr('disabled')
-                    }
-                    $('.cashback-title small strong').text(data.consumer_name)
-                    kLoadRequest()
-                })
-                .catch(err => {
-                    kCleanCashbackFields(false)
-                    kLoadRequest(undefined, 'Houve um erro ao tentar consultar o saldo desse cliente.', false)
-                });
+                    })
+                    .then(data => {
+                        var discount = parseFloat(data.available_discount);
+                        var discountTotal = parseFloat(data.total_currency_balance);
+                        if (discount >= 0.00) {
+                            localStorage.setItem('amountDiscount', discount.toFixed(2));
+                            $('#k-balance').text(localStorage.getItem('amountDiscount').replace('.', ','))
+                            $('#k-balance_total').text(discountTotal.toFixed(2).replace('.', ','))
+                            if ($('#k-amount').val() > 0 && $('#k-amount').val() != 99999 && discount > 0) {
+                                $('#k-exchange').removeAttr('disabled')
+                            }
+                            $('#k-clean').removeAttr('disabled')
+                        }
+                        $('.cashback-title small strong').text(data.consumer_name)
+                        kLoadRequest()
+                    })
+                    .catch(err => {
+                        kCleanCashbackFields(false)
+                        kLoadRequest(undefined, 'Houve um erro ao tentar consultar o saldo desse cliente.', false)
+                    });
+            }
         });
         $('#k-clean').on('click', () => {
             kCleanCashbackFields()

@@ -48,16 +48,18 @@ export function listenApplyDiscount(){
 
 export function listenRedeemCashback(widget, kDocument){
     // Verifica se está na última etapa da venda para poder efetuar a troca no Kisakdi
-    $('#btnSalvarVendaRapida').one('click', () => {
+    $('#btnSalvarVendaRapida').off('click').one('click', () => {
         if ($('.forma-pagamento-section').length) {
             widget.kRedeemCashback(kDocument)
+            $('#btnGerarPagamentoCobrancasPdv').off('click');
         }
     });
     // Verifica se foi clicado para gerar um pagamento para escutar o botão finalizar venda
-    $('#btnGerarPagamentoCobrancasPdv').one('click', () => {
+    $('#btnGerarPagamentoCobrancasPdv').off('click').one('click', () => {
         $('#bs-modal').one('click', '.modal-footer button', function () {
             if ($(this).text().toLowerCase().includes('finalizar venda')) {
                 widget.kRedeemCashback(kDocument)
+                $('#btnSalvarVendaRapida').off('click')
             }
         });
     });
